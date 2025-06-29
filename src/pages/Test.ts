@@ -1,0 +1,32 @@
+// import "../style.css";
+import { gsap } from "gsap";
+// import { resolveRoute } from "./router";
+
+import { createDiv } from "../utils/dom";
+
+// set style [id:container]
+const containerClass =
+  "w-full h-screen bg-gray-100 flex items-center justify-center";
+const boxClass = "w-24 h-24 bg-blue-500 rounded-lg mx-auto mt-20";
+
+export const createTest = (): HTMLElement => {
+  const container = createDiv("container", containerClass);
+
+  const box = createDiv("box", boxClass);
+  container?.appendChild(box);
+
+  container.appendChild(box);
+
+  // GSAP animation
+  gsap.to(box, {
+    duration: 1,
+    x: 200,
+    rotation: 1000,
+    scale: 3,
+    ease: "power2.inOut",
+    repeat: -1, // infinite repeat
+    yoyo: true,
+  });
+
+  return container;
+};
