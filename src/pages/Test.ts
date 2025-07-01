@@ -1,7 +1,4 @@
-// import "../style.css";
 import { gsap } from "gsap";
-// import { resolveRoute } from "./router";
-
 import { createDiv } from "../utils/dom";
 
 // set style [id:container]
@@ -13,7 +10,6 @@ export const createTest = (): HTMLElement => {
   const container = createDiv("container", containerClass);
 
   const box = createDiv("box", boxClass);
-  container?.appendChild(box);
 
   container.appendChild(box);
 
