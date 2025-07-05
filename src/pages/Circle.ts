@@ -15,16 +15,6 @@ export const createCircle = (): HTMLElement => {
     .then((svg) => {
       container.innerHTML = svg;
     });
-  //   const box = createDiv("box", boxClass);
-
-  //   container.appendChild(box);
-
-  // use timeline
-  //   const tl = gsap.timeline({ repeat: -1, yoyo: true });
-
-  //   tl.to(box, { x: 100, duration: 1 }) // 0s~1s
-  //     .to(box, { y: 100, duration: 1 }) // 1s~2s
-  //     .to(box, { scale: 1.5, duration: 1 }); // 2s~3s
 
   return container;
 };

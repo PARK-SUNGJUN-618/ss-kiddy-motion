@@ -1,4 +1,4 @@
-<svg height=100% width=100% > 
+<svg width="500" height="500" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
   <g id="circles" fill="yellow">
       <circle id="cr1" cx="200" cy="300" r="24"/>
       <circle id="cr2" cx="219.03" cy="395.67" r="24"/>
