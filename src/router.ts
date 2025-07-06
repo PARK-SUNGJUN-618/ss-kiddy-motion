@@ -1,11 +1,13 @@
 import { createHome } from "./pages/Home";
 import { createTest } from "./pages/Test";
 import { createCircle } from "./pages/Circle";
+import { createHandDraw } from "./pages/HandDraw";
 
 export const routes: Record<string, () => HTMLElement> = {
   "/": createHome,
   "/test": createTest,
   "/circle": createCircle,
+  "/hand-draw": createHandDraw,
 };
 
 export const resolveRoute = (): HTMLElement => {
