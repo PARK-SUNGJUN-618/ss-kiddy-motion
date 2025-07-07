@@ -1,31 +1,67 @@
 import { gsap } from "gsap";
-import { createDiv } from "../utils/dom";
-// import circleSvg from "../../public/images/circle.svg";
+import { createButton, createDiv } from "../utils/dom";
+import { GSDevTools } from "gsap/GSDevTools";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+// import handDraw from "../../public/images/handDraw.svg";
 
 // set style [id:container]
 const containerClass =
-  "w-full h-screen flex items-center justify-center bg-black";
+  "w-full h-screen flex flex-col items-center justify-center bg-white";
+const buttonWrapperClass = "flex justify-center gap-4";
+const buttonClass =
+  "w-20 h-10 bg-blue-500 text-white text-sm font-medium rounded-md flex items-center justify-center hover:bg-blue-600 transition";
 
 export const createHandDraw = (): HTMLElement => {
   const container = createDiv("container", containerClass);
+  const buttonWrapper = createDiv("buttonWrapper", buttonWrapperClass);
+
+  const pauseButton = createButton("pause", buttonClass);
+  const playButton = createButton("play", buttonClass);
+  const reverseButton = createButton("reverse", buttonClass);
+  const seekButton = createButton("seek", buttonClass);
+  const restartButton = createButton("restart", buttonClass);
 
   (async () => {
-    const res = await fetch("/images/circle.svg");
+    const res = await fetch("/images/handDraw.svg");
     const svg = await res.text();
     container.innerHTML = svg;
 
-    gsap
+    buttonWrapper.append(pauseButton);
+    buttonWrapper.append(playButton);
+    buttonWrapper.append(reverseButton);
+    buttonWrapper.append(seekButton);
+    buttonWrapper.append(restartButton);
+    container.append(buttonWrapper);
+
+    gsap.registerPlugin(GSDevTools);
+    gsap.registerPlugin(MotionPathPlugin);
+
+    let timeline = gsap
       .timeline({
-        defaults: { duration: 2, ease: "power1.inOut", yoyo: true, repeat: -1 },
+        repeat: 2,
+        repeatDelay: 5,
+        defaults: { duration: 12, ease: "power1.inOut" },
       })
-      .to("#cr1", { x: 500 })
-      .to("#cr2", { x: 461.94, y: -191.64 }, 0.25)
-      .to("#cr3", { x: 353.55, y: -353.56 }, 0.5)
-      .to("#cr4", { x: 191.34, y: -461.94 }, 0.75)
-      .to("#cr5", { y: -500 }, 1)
-      .to("#cr6", { x: -191.35, y: -461.94 }, 1.25)
-      .to("#cr7", { x: -353.55, y: -353.56 }, 1.5)
-      .to("#cr8", { x: -461.94, y: -191.34 }, 1.75);
+      .to("#hand", {
+        motionPath: {
+          path: "#path",
+          align: "#path",
+          alignOrigin: [0.28, 0.08],
+        },
+      })
+
+      .to("#path", { strokeDasharray: "4046, " + "0" }, "<");
+
+    (document.getElementById("pause") as HTMLButtonElement).onclick = () =>
+      timeline.pause();
+    (document.getElementById("play") as HTMLButtonElement).onclick = () =>
+      timeline.play();
+    (document.getElementById("reverse") as HTMLButtonElement).onclick = () =>
+      timeline.reverse();
+    (document.getElementById("seek") as HTMLButtonElement).onclick = () =>
+      timeline.seek(5);
+    (document.getElementById("restart") as HTMLButtonElement).onclick = () =>
+      timeline.restart();
   })();
 
   return container;
