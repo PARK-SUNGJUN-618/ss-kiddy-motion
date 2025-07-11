@@ -1,6 +1,5 @@
 import { gsap } from "gsap";
-import { createButton, createDiv } from "../utils/dom";
-import { GSDevTools } from "gsap/GSDevTools";
+import { createDiv } from "../utils/dom";
 
 class Triangle {
   id: string;
