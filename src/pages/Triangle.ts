@@ -54,7 +54,52 @@ const containerClass =
 
 export const createTriangle = (): HTMLElement => {
   const container = createDiv("container", containerClass);
-  const svgContainer = createDiv("svgContainer", containerClass);
+  const svgContainer = createDiv("svgContainer", "");
+
+  let y1 = 60.6,
+    y2 = 70.7,
+    y3 = 70.7;
+  const quantRow = 15,
+    quantColumn = 27;
+  const stepX = 30,
+    stepY = 30;
+  let i = 0;
+
+  for (let j = 0; j < quantRow; j++) {
+    let x1 = 77.9,
+      x2 = 61.7,
+      x3 = 94;
+    let angle = -90;
+
+    for (let k = 0; k < quantColumn; k++) {
+      i++;
+      const triangle = new Triangle(
+        `trg${i}`,
+        x1,
+        y1,
+        x2,
+        y2,
+        x3,
+        y3,
+        "yellow"
+      );
+      triangle.draw(svgContainer);
+
+      gsap.set(`#trg${i}`, {
+        transformOrigin: "-50% -50%",
+        rotate: angle,
+      });
+
+      angle += 13.3;
+      x1 += stepX;
+      x2 += stepX;
+      x3 += stepX;
+    }
+
+    y1 += stepY;
+    y2 += stepY;
+    y3 += stepY;
+  }
 
   return container;
 };
