@@ -10,7 +10,7 @@ const drawTriangle = (
   x3: number,
   y3: number,
   fill: string,
-  svgContainer: HTMLElement
+  svgContainer: SVGSVGElement
 ): SVGPolygonElement => {
   const polygon = document.createElementNS(
     "http://www.w3.org/2000/svg",
@@ -33,7 +33,15 @@ const containerClass =
 
 export const createTriangle = (): HTMLElement => {
   const container = createDiv("container", containerClass);
-  const svgContainer = createDiv("svgContainer", "");
+  const svgContainer = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg"
+  );
+  svgContainer.setAttribute("id", "svgContainer");
+  svgContainer.setAttribute("width", "100%");
+  svgContainer.setAttribute("height", "100%");
+
+  container.appendChild(svgContainer);
 
   let y1 = 60.6;
   let y2 = 70.7;
@@ -44,6 +52,7 @@ export const createTriangle = (): HTMLElement => {
   const stepY = 30;
   let i = 0;
 
+  console.log("HERE???");
   for (let j = 0; j < quantRow; j++) {
     let x1 = 77.9;
     let x2 = 61.7;
@@ -63,7 +72,7 @@ export const createTriangle = (): HTMLElement => {
         "yellow",
         svgContainer
       );
-
+      console.log("HERE???:[" + triangle + "]");
       gsap.set(triangle, {
         transformOrigin: "-50% -50%",
         rotate: angle,
