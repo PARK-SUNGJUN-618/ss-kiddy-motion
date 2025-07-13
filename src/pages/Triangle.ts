@@ -75,6 +75,7 @@ export const createTriangle = (): HTMLElement => {
   return container;
 };
 
+// create triangle
 const drawTriangle = (
   id: string,
   x1: number,
